@@ -20,6 +20,7 @@ static NSString *const kLanguageSyncServiceUUID =
     @"7A780001-6D9F-4D4E-9E37-9A6E41F5A101";
 static NSString *const kLanguageSyncCharacteristicUUID =
     @"7A780002-6D9F-4D4E-9E37-9A6E41F5A101";
+static NSString *const kDeviceName = @"Round Language Switch";
 
 static CFTypeRef sourceProperty(TISInputSourceRef source, CFStringRef key) {
     return TISGetInputSourceProperty(source, key);
@@ -113,7 +114,12 @@ static void languageCode(TISInputSourceRef source, char code[3]) {
         [self connectDevice:connected.firstObject];
         return;
     }
-    [self.manager scanForPeripheralsWithServices:@[ service ]
+    // The ESP32 advertising payload also contains the HID service and may put
+    // the custom 128-bit UUID in the scan response.  A UUID-filtered scan can
+    // therefore miss the device on some macOS/Bluetooth-controller versions.
+    // Scan broadly, match the exact product name, then verify the service after
+    // connecting.
+    [self.manager scanForPeripheralsWithServices:nil
                                          options:@{
                                              CBCentralManagerScanOptionAllowDuplicatesKey : @NO
                                          }];
@@ -145,8 +151,14 @@ static void languageCode(TISInputSourceRef source, char code[3]) {
     didDiscoverPeripheral:(CBPeripheral *)peripheral
         advertisementData:(NSDictionary<NSString *, id> *)advertisementData
                      RSSI:(NSNumber *)RSSI {
-    (void)advertisementData;
     (void)RSSI;
+    NSString *name = peripheral.name;
+    if (name == nil) {
+        name = advertisementData[CBAdvertisementDataLocalNameKey];
+    }
+    if (![name isEqualToString:kDeviceName]) {
+        return;
+    }
     [self connectDevice:peripheral];
 }
 
