@@ -36,10 +36,6 @@ plutil -replace StandardErrorPath -string "$LOG_FILE" "$TARGET_PLIST"
 plutil -lint "$TARGET_PLIST"
 launchctl bootstrap "$DOMAIN" "$TARGET_PLIST"
 launchctl kickstart -k "$DOMAIN/$LABEL"
-# Launch the registered app once through LaunchServices as well.  This makes
-# macOS present the Bluetooth privacy prompt in the foreground on first
-# install instead of silently leaving a background-only LaunchAgent denied.
-/usr/bin/open "$TARGET_APP"
 
 echo
 echo "Round Display Helper is installed and running."
