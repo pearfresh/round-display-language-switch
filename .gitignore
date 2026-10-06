@@ -1,0 +1,9 @@
+.pio/
+.pioenv/
+.venv/
+.cache/
+build/
+logs/
+dist/
+backup/
+.DS_Store

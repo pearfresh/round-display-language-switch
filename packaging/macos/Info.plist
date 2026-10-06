@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleDevelopmentRegion</key>
+  <string>en</string>
+  <key>CFBundleExecutable</key>
+  <string>round-display-helper</string>
+  <key>CFBundleIdentifier</key>
+  <string>com.rounddisplay.input-language-helper</string>
+  <key>CFBundleInfoDictionaryVersion</key>
+  <string>6.0</string>
+  <key>CFBundleName</key>
+  <string>Round Display Helper</string>
+  <key>CFBundleDisplayName</key>
+  <string>Round Display Helper</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>CFBundleShortVersionString</key>
+  <string>1.0</string>
+  <key>CFBundleVersion</key>
+  <string>1</string>
+  <key>LSBackgroundOnly</key>
+  <true/>
+  <key>LSMinimumSystemVersion</key>
+  <string>12.0</string>
+  <key>NSBluetoothAlwaysUsageDescription</key>
+  <string>Round Display uses Bluetooth to keep its flag synchronized with the current keyboard input language.</string>
+  <key>NSBluetoothPeripheralUsageDescription</key>
+  <string>Round Display uses Bluetooth to keep its flag synchronized with the current keyboard input language.</string>
+</dict>
+</plist>
